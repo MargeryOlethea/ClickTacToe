@@ -4,6 +4,7 @@ import CreateRoomModal from "./modals/CreateRoomModal";
 import TableRoom from "../components/TableRoom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoomsThunk } from "../features/roomsSlice";
+import Loading from "../components/Loading";
 
 function HomePage() {
   // FETCH DATA
@@ -14,7 +15,6 @@ function HomePage() {
     dispatch(fetchRoomsThunk());
   }, []);
 
-  console.log(rooms);
   // PASSWORD MODAL
   const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
 
@@ -32,6 +32,14 @@ function HomePage() {
   const closeCreateRoomModal = () => setCreateRoomModalOpen(false);
   console.log(isCreateRoomModalOpen);
 
+  if (loading) {
+    return (
+      <div className="h-screen w-screen flex justify-center align-center">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
     <>
       <section className="p-10 mx-16">
@@ -43,9 +51,7 @@ function HomePage() {
         >
           Create Room
         </button>
-        {/* Ini Atasnya Table End */}
-
-        <TableRoom />
+        {rooms.length > 0 && !error && <TableRoom rooms={rooms} />}
 
         {/* MODLA MODAL */}
 
