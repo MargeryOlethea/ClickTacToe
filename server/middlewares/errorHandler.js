@@ -17,7 +17,9 @@ const errorHandler = (error, req, res, next) => {
     message = "Foreign Key Error";
   }
 
-  if (error.message === `not login`) {
+  if (error.message === `no room password`) {
+    statusCode = 400;
+    message = "Password is required";
   }
 
   if (error.name == "SequelizeDatabaseError") {

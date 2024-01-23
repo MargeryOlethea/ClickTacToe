@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       turn: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: { msg: "Turn is required" },
@@ -62,6 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       history: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: ` , , , , , , , , `,
         validate: {
           notNull: { msg: "History is required" },
           notEmpty: { msg: "History is required" },

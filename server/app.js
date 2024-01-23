@@ -15,12 +15,13 @@ app.use(express.json());
 
 // app.post("/register");
 // app.post("login");
-// app.get("/rooms");
-// app.post("/rooms");
-// app.put("/rooms/:RoomId");
-// app.put("/user/:UserId");
-// app.get("/user");
-// app.get("/mygames");
+app.post("/rooms", Controller.createRooms);
+app.get("/rooms", Controller.readRooms);
+app.patch("/rooms/:RoomId/join", Controller.joinPlayer);
+app.put("/rooms/:RoomId", Controller.updateRooms);
+app.put("/user/:UserId", Controller.updateUser);
+app.get("/user", Controller.readUsers);
+app.get("/mygames", Controller.readMyRooms);
 app.use(errorHandler);
 
 app.listen(port, () => {
