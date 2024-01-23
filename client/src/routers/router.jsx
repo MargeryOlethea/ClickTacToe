@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout";
 import Testing from "../views/testing/Testing";
 import LoginPage from "../views/LoginPage";
 import RegisterPage from "../views/RegisterPage";
+import GamePage from "../views/GamePage";
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
     element: <BaseLayout />,
     children: [
       { path: "/", element: <Testing /> },
-      { path: "/game", element: "" },
+      { path: "/game", element: <GamePage /> },
       { path: "/my-game", element: "" },
       { path: "/leaderboards", element: "" },
     ],

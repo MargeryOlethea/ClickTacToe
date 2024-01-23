@@ -15,10 +15,7 @@ export default function Nav() {
             </Link>
           </div>
           <div className="md:hidden">
-            <button
-              className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
-              onClick={() => setState(!state)}
-            >
+            <button className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border">
               {state ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -58,10 +55,13 @@ export default function Nav() {
         >
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             <li className="text-gray-600 hover:text-orange-600">
-              <a>My Games</a>
+              <Link to="/my-game">My Games</Link>
             </li>
             <li className="text-gray-600 hover:text-orange-600">
-              <a>Leaderboards</a>
+              <Link to="/leaderboards">Leaderboards</Link>
+            </li>
+            <li className="text-gray-600 hover:text-orange-600">
+              <Link to="/game">Game</Link>
             </li>
           </ul>
         </div>
