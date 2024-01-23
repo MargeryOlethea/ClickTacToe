@@ -28,6 +28,18 @@ const errorHandler = (error, req, res, next) => {
     statusCode = 400;
     message = "Username must be unique";
   }
+  if(error.name == "Unauthorized"){
+    statusCode = 401
+    message = 'Unauthorized'
+  }
+  if(error.name === "LoginInputError"){
+    statusCode = 400
+    message = "Email/password is required"
+  }
+  if(error.name === "InvalidCredential"){
+    statusCode = 401
+    message = "Unauthorized"
+  }
 
   res.status(statusCode).json({ message });
 };
