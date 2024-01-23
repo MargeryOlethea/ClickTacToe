@@ -31,24 +31,7 @@ function Testing() {
         {" "}
         buka create room
       </button>
-      <div className="h-screen w-screen p-10 flex justify-center items-center">
-        <div className="h-5/6 w-5/6 shadow-lg rounded-2xl p-10">
-          <p className="font-bold text-3xl mx-auto">Your Game</p>
-          <div className="flex justify-center items-center">
-            <div className="grid grid-cols-3 w-[450px] h-[450px] bg-white p-10">
-              <Blocks value="X" />
-              <Blocks />
-              <Blocks value="O" />
-              <Blocks />
-              <Blocks value="O" />
-              <Blocks value="X" />
-              <Blocks value="O" />
-              <Blocks />
-              <Blocks value="X" />
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className="h-screen w-screen p-10 flex justify-center items-center"></div>
       <PasswordFormModal
         isOpen={isPasswordModalOpen}
         onClose={closePasswordModal}

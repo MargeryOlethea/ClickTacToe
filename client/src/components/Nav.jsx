@@ -66,12 +66,9 @@ export default function Nav() {
           </ul>
         </div>
         <div className="hidden md:inline-block">
-          <a
-            href="javascript:void(0)"
-            className="py-3 px-4 text-white bg-orange-600 hover:bg-orange-500 rounded-md shadow"
-          >
+          <span className="py-3 px-4 text-white bg-orange-600 hover:bg-orange-500 rounded-md shadow">
             Logout
-          </a>
+          </span>
         </div>
       </div>
     </nav>
