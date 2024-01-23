@@ -5,7 +5,7 @@ export default function TableRoom({ rooms }) {
   return (
     <>
       <section className="container px-4 mx-auto">
-        {rooms && (
+        {rooms.length > 0 && (
           <div className="flex flex-col mt-6">
             <div className=" -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle px-4 mt-5">
