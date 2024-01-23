@@ -2,6 +2,8 @@ if (process.env.NODE_ENV !== "production") {
   require(`dotenv`).config();
 }
 
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 const express = require("express");
 const cors = require(`cors`);
 const Controller = require("./controllers/controller");
@@ -12,6 +14,12 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
+
+const httpServer = createServer();
+const io = new Server(httpServer, {
+  cors: { origin: process.env.SOCKET_CORS_URL },
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -29,6 +37,10 @@ app.get("/mygames", Controller.readMyRooms);
 
 app.use(errorHandler);
 
-app.listen(port, () => {
+io.on("connection", (socket) => {
+  console.log("a user connected " + socket.id);
+});
+
+httpServer.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
