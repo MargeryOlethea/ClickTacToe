@@ -80,7 +80,12 @@ class Controller {
 
   static async readRooms(req, res, next) {
     try {
-      let data = await Room.findAll({ order: [["createdAt", "DESC"]] });
+      const { filter } = req.query;
+
+      let query = { order: [["createdAt", "DESC"]] };
+      if (filter) query.where = { SecondUserId: null };
+
+      let data = await Room.findAll(query);
       res.status(200).json(data);
     } catch (error) {
       next(error);
