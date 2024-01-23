@@ -31,6 +31,11 @@ const errorHandler = (error, req, res, next) => {
     message = "Cannot enter room";
   }
 
+  if (error.message === `wrong password`) {
+    statusCode = 401;
+    message = "Wrong Password";
+  }
+
   if (error.name == "SequelizeDatabaseError") {
     statusCode = 400;
     message = "Invalid input type";

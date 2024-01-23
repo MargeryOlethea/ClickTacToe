@@ -96,8 +96,12 @@ class Controller {
     try {
       let { userId } = req.loginInfo;
       let { RoomId } = req.params;
+      let { password } = req.body;
 
       let roomFound = await Room.findByPk(RoomId);
+
+      if (roomFound.status === "Private" && roomFound.password !== password)
+        throw new Error("wrong password");
 
       if (roomFound.FirstUserId === userId) {
         res.status(200).json({ message: "Masuk aja" });
