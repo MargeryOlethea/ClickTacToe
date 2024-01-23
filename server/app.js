@@ -15,7 +15,7 @@ const port = 3000;
 
 app.use(cors());
 
-const httpServer = createServer();
+const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: { origin: process.env.SOCKET_CORS_URL },
 });
@@ -29,6 +29,7 @@ app.post("/login", Controller.login);
 app.use(authentication);
 app.post("/rooms", Controller.createRooms);
 app.get("/rooms", Controller.readRooms);
+app.get("/rooms/:RoomId", Controller.readRoomsById);
 app.patch("/rooms/:RoomId/join", joinAuthorization, Controller.joinPlayer);
 app.put("/rooms/:RoomId", Controller.updateRooms);
 app.put("/user/:UserId", Controller.updateUser);

@@ -92,6 +92,19 @@ class Controller {
     }
   }
 
+  static async readRoomsById(req, res, next) {
+    try {
+      const { RoomId } = req.params;
+
+      let roomFound = await Room.findByPk(RoomId);
+      if (!roomFound) throw new Error("not found");
+
+      res.status(200).json(roomFound);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async joinPlayer(req, res, next) {
     try {
       let { userId } = req.loginInfo;

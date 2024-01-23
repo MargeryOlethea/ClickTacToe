@@ -21,6 +21,10 @@ const errorHandler = (error, req, res, next) => {
     statusCode = 400;
     message = "Password is required";
   }
+  if (error.message === `not found`) {
+    statusCode = 404;
+    message = "Room Not Found";
+  }
 
   if (error.message === `room full`) {
     statusCode = 403;
