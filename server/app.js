@@ -15,7 +15,7 @@ const port = 3000;
 
 app.use(cors());
 
-const httpServer = createServer();
+const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: { origin: process.env.SOCKET_CORS_URL },
 });
