@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Blocks from "./testing/Blocks";
+import Blocks from "../components/Blocks";
 import { Link } from "react-router-dom";
 
 function GamePage() {
@@ -86,10 +86,12 @@ function GamePage() {
         </div>
       </div>
       {winner && (
-        <div className="flex justify-center">
-          <button className="w-1/6 px-4 py-2 text-white font-medium bg-orange-600 hover:bg-orange-500 active:bg-orange-600 rounded-lg duration-150">
-            <Link to="/">Back to home</Link>
-          </button>
+        <div className="flex justify-center w-full">
+          <Link to="/" className="w-1/6">
+            <button className="w-full px-4 py-2 text-white font-medium bg-orange-600 hover:bg-orange-500 active:bg-orange-600 rounded-lg duration-150">
+              Back to home
+            </button>
+          </Link>
         </div>
       )}
     </>

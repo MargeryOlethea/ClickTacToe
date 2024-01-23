@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import BaseLayout from "../layouts/BaseLayout";
-import Testing from "../views/testing/Testing";
 import LoginPage from "../views/LoginPage";
 import RegisterPage from "../views/RegisterPage";
 import GamePage from "../views/GamePage";
+import HomePage from "../views/Homepage";
+import MyGamePage from "../views/MyGamePage";
+import LeaderboardPage from "../views/LeaderboardPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,10 +19,10 @@ export const router = createBrowserRouter([
   {
     element: <BaseLayout />,
     children: [
-      { path: "/", element: <Testing /> },
+      { path: "/", element: <HomePage /> },
       { path: "/game", element: <GamePage /> },
-      { path: "/my-game", element: "" },
-      { path: "/leaderboards", element: "" },
+      { path: "/my-game", element: <MyGamePage /> },
+      { path: "/leaderboards", element: <LeaderboardPage /> },
     ],
   },
 ]);
