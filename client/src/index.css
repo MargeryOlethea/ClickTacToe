@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.swal2-title {
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.swal2-confirm {
+  background-color: #ea580b !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+}
+
+.swal2-cancel {
+  border-radius: 25px !important;
+}
+
+.swal2-popup {
+  border-radius: 25px !important;
+}
+
+.swal2-icon {
+  color: #ea580b !important;
+  border-color: #ea580b !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}

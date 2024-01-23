@@ -1,15 +1,65 @@
 import { useState } from "react";
+import Loading from "../../components/Loading";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { fetchRoomsThunk } from "../../features/roomsSlice";
 
 /* eslint-disable react/prop-types */
 function CreateRoomModal({ isOpen, onClose }) {
+  const [loading, setLoading] = useState(false);
   const [createRoomData, setCreateRoomData] = useState({
     name: "",
     status: "",
     password: "",
   });
 
+  // HANDLE SUBMIT
+  const url = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      setLoading(true);
+
+      const { data } = await axios.post(`${url}/rooms`, createRoomData, {
+        headers: { Authorization: `Bearer ${localStorage.access_token}` },
+      });
+
+      dispatch(fetchRoomsThunk());
+      navigate("/");
+
+      onClose();
+
+      Swal.fire({
+        title: "Success!",
+        icon: "success",
+        text: `Success created room ${data.name}!`,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        icon: "error",
+        text: error.response.data.message,
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // CONDITION BUAT MODAL
   if (!isOpen) return null;
+
+  // CONDITIONAL LOADING
+  if (loading) {
+    return (
+      <div className="h-full w-full flex justify-center align-center">
+        <Loading />
+      </div>
+    );
+  }
 
   // START RETURN
   return (
@@ -27,7 +77,10 @@ function CreateRoomModal({ isOpen, onClose }) {
         >
           <div className="p-10 w-full h-full">
             <p className="text-2xl font-bold text-gray-800">Create Room</p>
-            <form className="text-gray-800 mt-8 space-y-5">
+            <form
+              onSubmit={handleSubmit}
+              className="text-gray-800 mt-8 space-y-5"
+            >
               <div>
                 <label className="font-medium">Name</label>
                 <input
@@ -47,7 +100,6 @@ function CreateRoomModal({ isOpen, onClose }) {
               <div>
                 <label className="font-medium">Status</label>
                 <select
-                  defaultValue={"Public"}
                   required
                   className="py-3 px-5 w-full rounded-2xl shadow-inner bg-gray-100 mt-2"
                   onChange={(e) =>
@@ -57,6 +109,7 @@ function CreateRoomModal({ isOpen, onClose }) {
                     })
                   }
                 >
+                  <option hidden>Choose</option>
                   <option value="Public">Public</option>
                   <option value="Private">Private</option>
                 </select>
