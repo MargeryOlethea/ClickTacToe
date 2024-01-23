@@ -1,9 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import Logo from "./Logo";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+useNavigate
 export default function Nav() {
+  const navigate = useNavigate()
+
+  function handleLogout(){
+    localStorage.clear()
+    navigate("/login")
+  }
   return (
     <nav className="bg-white w-full border-b md:border-0 md:static rounded-lg shadow-md">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
@@ -28,9 +34,9 @@ export default function Nav() {
           </ul>
         </div>
         <div className="hidden md:inline-block">
-          <span className="py-3 px-4 text-white bg-orange-600 hover:bg-orange-500 rounded-md shadow">
+          <button onClick={handleLogout} className="py-3 px-4 text-white bg-orange-600 hover:bg-orange-500 rounded-md shadow">
             Logout
-          </span>
+          </button>
         </div>
       </div>
     </nav>

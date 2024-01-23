@@ -7,14 +7,17 @@ import HomePage from "../views/Homepage";
 import MyGamePage from "../views/MyGamePage";
 import LeaderboardPage from "../views/LeaderboardPage";
 
+const url = import.meta.env.VITE_API_URL;
+console.log(url, "ini url");
+
 export const router = createBrowserRouter([
   {
     path: "/register",
-    element: <RegisterPage />,
+    element: <RegisterPage url={url} />,
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <LoginPage url={url} />,
   },
   {
     element: <BaseLayout />,

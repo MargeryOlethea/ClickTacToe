@@ -1,15 +1,32 @@
 /* eslint-disable react/no-unescaped-entities */
-
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
-export default function LoginPage() {
+export default function LoginPage({ url }) {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
-
-  function handleSubmit(e) {
+  const navigate = useNavigate();
+  async function handleSubmit(e) {
     e.preventDefault();
     console.log(loginData);
+    try {
+      let { data } = await axios.post(`${url}/login`, loginData);
+      console.log(data);
+      localStorage.setItem("access_token", data.access_token);
+      Swal.fire({
+        title: "success",
+        icon: "success",
+        timer: 1000,
+      });
+      navigate("/");
+    } catch (error) {
+      Swal.fire({
+        title: error.response.data.error,
+        icon: "error",
+      });
+    }
   }
 
   return (

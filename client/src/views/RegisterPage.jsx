@@ -1,16 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-export default function RegisterPage() {
+export default function RegisterPage({ url }) {
   const [registerData, setRegisterData] = useState({
     username: "",
     password: "",
   });
+  const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     console.log(registerData);
+
+    try {
+      const { data } = await axios.post(`${url}/register`, registerData);
+      Swal.fire({
+        title: "success",
+        icon: "success",
+      });
+      navigate("/login");
+    } catch (error) {
+      Swal.fire({
+        title: error.response.data.error,
+        icon: "error",
+      });
+    }
   }
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
