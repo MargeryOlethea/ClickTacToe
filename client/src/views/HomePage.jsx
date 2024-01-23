@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PasswordFormModal from "./modals/PasswordFormModal";
 import CreateRoomModal from "./modals/CreateRoomModal";
 import TableRoom from "../components/TableRoom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRoomsThunk } from "../features/roomsSlice";
 
 function HomePage() {
-  // // PASSWORD MODAL
+  // FETCH DATA
+  const { rooms, loading, error } = useSelector((state) => state.rooms);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchRoomsThunk());
+  }, []);
+
+  console.log(rooms);
+  // PASSWORD MODAL
   const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
 
   const openPasswordModal = () => {
