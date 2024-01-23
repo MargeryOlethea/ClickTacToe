@@ -1,15 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import BaseLayout from "../layouts/BaseLayout";
 import Testing from "../views/testing/Testing";
+import LoginPage from "../views/LoginPage";
+import RegisterPage from "../views/RegisterPage";
 
 export const router = createBrowserRouter([
   {
     path: "/register",
-    element: "",
+    element: <RegisterPage />,
   },
   {
     path: "/login",
-    element: "",
+    element: <LoginPage />,
   },
   {
     element: <BaseLayout />,

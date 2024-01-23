@@ -14,13 +14,13 @@ function PasswordFormModal({ isOpen, onClose }) {
 
         <div className="fixed bg-white w-2/6 h-2/6 rounded-3xl shadow-lg flex">
           <div className="p-10 w-full h-full mt-5">
-            <p className="text-lg font-bold">Insert Password</p>
+            <p className="text-lg font-bold text-gray-800">Insert Password</p>
             <input
               type="text"
               className="py-3 px-5 w-full rounded-2xl shadow-inner bg-gray-100 mt-5"
               placeholder="password"
             />
-            <button className="mt-5 py-3 px-5 w-2/6 shadow-md bg-blue-500 text-white rounded-2xl font-bold">
+            <button className="w-2/6 mt-5 px-4 py-2 text-white font-medium bg-orange-600 hover:bg-orange-500 active:bg-orange-600 rounded-lg duration-150">
               Join
             </button>
           </div>

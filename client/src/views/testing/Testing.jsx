@@ -1,9 +1,10 @@
 import { useState } from "react";
 import PasswordFormModal from "../modals/PasswordFormModal";
 import Blocks from "./Blocks";
+import CreateRoomModal from "../modals/CreateRoomModal";
 
 function Testing() {
-  // Conditioning for modal password
+  // // PASSWORD MODAL
   const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
 
   const openPasswordModal = () => {
@@ -11,10 +12,26 @@ function Testing() {
   };
   const closePasswordModal = () => setPasswordModalOpen(false);
 
+  // CREATE ROOM MODAL
+  const [isCreateRoomModalOpen, setCreateRoomModalOpen] = useState(false);
+
+  const openCreateRoomModal = () => {
+    setCreateRoomModalOpen(true);
+  };
+  const closeCreateRoomModal = () => setCreateRoomModalOpen(false);
+  console.log(isCreateRoomModalOpen);
+
   return (
     <>
+      <button className="m-10 border p-5" onClick={openPasswordModal}>
+        {" "}
+        buka password
+      </button>
+      <button className="m-10 border p-5" onClick={openCreateRoomModal}>
+        {" "}
+        buka create room
+      </button>
       <div className="h-screen w-screen p-10 flex justify-center items-center">
-        <button onClick={openPasswordModal}> buka password</button>
         <div className="h-5/6 w-5/6 shadow-lg rounded-2xl p-10">
           <p className="font-bold text-3xl mx-auto">Your Game</p>
           <div className="flex justify-center items-center">
@@ -35,6 +52,11 @@ function Testing() {
       <PasswordFormModal
         isOpen={isPasswordModalOpen}
         onClose={closePasswordModal}
+      />
+
+      <CreateRoomModal
+        isOpen={isCreateRoomModalOpen}
+        onClose={closeCreateRoomModal}
       />
     </>
   );
