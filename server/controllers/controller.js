@@ -1,6 +1,5 @@
 const { Op } = require("sequelize");
 const { User, Room } = require(`../models`);
-const { User } = require("../models");
 const { comparePassword } = require("../utils/hash");
 const { createToken } = require("../utils/token");
 
@@ -22,6 +21,7 @@ class Controller {
       next(error);
     }
   }
+
   static async login(req, res, next) {
     try {
       const { username, password } = req.body;
@@ -33,8 +33,7 @@ class Controller {
         where: { username },
       });
 
-      console.log(foundUser);
-      if (!foundUser || !password) {
+      if (!foundUser) {
         throw { name: "InvalidCredential" };
       }
 
@@ -58,19 +57,19 @@ class Controller {
       next(error);
     }
   }
+
   static async createRooms(req, res, next) {
     try {
-      const id = 1;
-      const username = "user";
-      //ganti jadi dari login info
+      const { userId, username } = req.loginInfo;
       const { name, status, password } = req.body;
+
       if (status === "Private" && !password)
         throw new Error(`no room password`);
       let data = await Room.create({
         name,
         status,
         password,
-        FirstUserId: id,
+        FirstUserId: userId,
         turn: username,
       });
       res.status(201).json(data);
@@ -90,12 +89,18 @@ class Controller {
 
   static async joinPlayer(req, res, next) {
     try {
-      let UserId = 2;
-      //dari req.loginInfo
+      let { userId } = req.loginInfo;
       let { RoomId } = req.params;
-      await Room.update({ SecondUserId: UserId }, { where: { id: RoomId } });
-      let data = await Room.findByPk(RoomId);
-      res.status(200).json(data);
+
+      let roomFound = await Room.findByPk(RoomId);
+
+      if (roomFound.FirstUserId === userId) {
+        res.status(200).json({ message: "Masuk aja" });
+      } else {
+        await Room.update({ SecondUserId: userId }, { where: { id: RoomId } });
+        let data = await Room.findByPk(RoomId);
+        res.status(200).json(data);
+      }
     } catch (error) {
       next(error);
     }
@@ -103,8 +108,7 @@ class Controller {
 
   static async updateRooms(req, res, next) {
     try {
-      let UserId = 1;
-      //dari login
+      let { userId } = req.loginInfo;
       let { RoomId } = req.params;
 
       let room = await Room.findByPk(RoomId, {
@@ -124,7 +128,7 @@ class Controller {
 
       let { history, winner } = req.body;
 
-      if (UserId === room.FirstUserId) {
+      if (userId === room.FirstUserId) {
         await Room.update(
           {
             history,
@@ -155,7 +159,6 @@ class Controller {
   static async updateUser(req, res, next) {
     try {
       let { UserId } = req.params;
-      //dari params
       let { match } = req.body;
 
       let userFound = await User.findByPk(UserId);
@@ -200,17 +203,16 @@ class Controller {
 
   static async readMyRooms(req, res, next) {
     try {
-      let UserId = 2;
-      //dapet dari login
+      let { userId } = req.loginInfo;
 
       let data = await Room.findAll({
         where: {
           [Op.or]: [
             {
-              FirstUserId: UserId,
+              FirstUserId: userId,
             },
             {
-              SecondUserId: UserId,
+              SecondUserId: userId,
             },
           ],
         },

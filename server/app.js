@@ -7,6 +7,7 @@ const cors = require(`cors`);
 const Controller = require("./controllers/controller");
 const errorHandler = require("./middlewares/errorHandler");
 const authentication = require("./middlewares/authentication");
+const joinAuthorization = require("./middlewares/joinauthorization");
 const app = express();
 const port = 3000;
 
@@ -20,7 +21,7 @@ app.post("/login", Controller.login);
 app.use(authentication);
 app.post("/rooms", Controller.createRooms);
 app.get("/rooms", Controller.readRooms);
-app.patch("/rooms/:RoomId/join", Controller.joinPlayer);
+app.patch("/rooms/:RoomId/join", joinAuthorization, Controller.joinPlayer);
 app.put("/rooms/:RoomId", Controller.updateRooms);
 app.put("/user/:UserId", Controller.updateUser);
 app.get("/user", Controller.readUsers);

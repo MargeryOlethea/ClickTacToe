@@ -22,6 +22,15 @@ const errorHandler = (error, req, res, next) => {
     message = "Password is required";
   }
 
+  if (error.message === `room full`) {
+    statusCode = 403;
+    message = "Room is full";
+  }
+  if (error.message === `forbidden`) {
+    statusCode = 403;
+    message = "Cannot enter room";
+  }
+
   if (error.name == "SequelizeDatabaseError") {
     statusCode = 400;
     message = "Invalid input type";
@@ -30,17 +39,17 @@ const errorHandler = (error, req, res, next) => {
     statusCode = 400;
     message = "Username must be unique";
   }
-  if(error.name == "Unauthorized"){
-    statusCode = 401
-    message = 'Unauthorized'
+  if (error.name == "Unauthorized") {
+    statusCode = 401;
+    message = "Unauthorized";
   }
-  if(error.name === "LoginInputError"){
-    statusCode = 400
-    message = "Email/password is required"
+  if (error.name === "LoginInputError") {
+    statusCode = 400;
+    message = "Email/password is required";
   }
-  if(error.name === "InvalidCredential"){
-    statusCode = 401
-    message = "Unauthorized"
+  if (error.name === "InvalidCredential") {
+    statusCode = 401;
+    message = "Invalid username/password ";
   }
 
   res.status(statusCode).json({ message });
