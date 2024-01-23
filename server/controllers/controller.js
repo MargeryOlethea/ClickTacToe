@@ -82,7 +82,21 @@ class Controller {
     try {
       const { filter } = req.query;
 
-      let query = { order: [["createdAt", "DESC"]] };
+      let query = {
+        order: [["createdAt", "DESC"]],
+        include: [
+          {
+            model: User,
+            as: "FirstUser",
+            attributes: { exclude: ["password"] },
+          },
+          {
+            model: User,
+            as: "SecondUser",
+            attributes: { exclude: ["password"] },
+          },
+        ],
+      };
       if (filter) query.where = { SecondUserId: null };
 
       let data = await Room.findAll(query);
