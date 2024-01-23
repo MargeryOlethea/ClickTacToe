@@ -83,11 +83,38 @@ class Controller {
     try {
       const { filter } = req.query;
 
-      let query = { order: [["createdAt", "DESC"]] };
+      let query = {
+        order: [["createdAt", "DESC"]],
+        include: [
+          {
+            model: User,
+            as: "FirstUser",
+            attributes: { exclude: ["password"] },
+          },
+          {
+            model: User,
+            as: "SecondUser",
+            attributes: { exclude: ["password"] },
+          },
+        ],
+      };
       if (filter) query.where = { SecondUserId: null };
 
       let data = await Room.findAll(query);
       res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async readRoomsById(req, res, next) {
+    try {
+      const { RoomId } = req.params;
+
+      let roomFound = await Room.findByPk(RoomId);
+      if (!roomFound) throw new Error("not found");
+
+      res.status(200).json(roomFound);
     } catch (error) {
       next(error);
     }
