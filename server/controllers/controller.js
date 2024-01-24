@@ -96,6 +96,7 @@ class Controller {
             attributes: { exclude: ["password"] },
           },
         ],
+        limit: 15,
       };
       if (filter) query.where = { SecondUserId: null };
 
