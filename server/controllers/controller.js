@@ -7,6 +7,7 @@ class Controller {
   static async register(req, res, next) {
     try {
       const { username, password, totalWin, totalPlay } = req.body;
+
       const user = await User.create({
         username,
         password,
@@ -172,7 +173,7 @@ class Controller {
             winner,
             turn: room.SecondUser.username,
           },
-          { where: { id: RoomId } }
+          { where: { id: RoomId } },
         );
       } else {
         await Room.update(
@@ -181,7 +182,7 @@ class Controller {
             winner,
             turn: room.FirstUser.username,
           },
-          { where: { id: RoomId } }
+          { where: { id: RoomId } },
         );
       }
 
@@ -206,7 +207,7 @@ class Controller {
             totalPlay: userFound.totalPlay + 1,
             totalWin: userFound.totalWin + 1,
           },
-          { where: { id: UserId } }
+          { where: { id: UserId } },
         );
 
       if (match === "lose" || match === "tie")
@@ -214,7 +215,7 @@ class Controller {
           {
             totalPlay: userFound.totalPlay + 1,
           },
-          { where: { id: UserId } }
+          { where: { id: UserId } },
         );
 
       userFound = await User.findByPk(UserId);
