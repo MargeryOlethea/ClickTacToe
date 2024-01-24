@@ -215,32 +215,35 @@ function GamePage() {
     socket.emit("next turn");
   }
 
-  // SWAL BUAT PEMENANG
-  if (game?.winner === localStorage.username) {
-    Swal.fire({
-      title: "You win!",
-      text: "Congratulations!",
-    });
-  }
-
-  // SWAL BUAT YG KALAH
-  if (
-    game?.winner === game?.SecondUser?.username ||
-    game?.winner === game?.FirstUser?.username
-  ) {
-    if (game?.winner !== localStorage.username) {
+  if (game.winner) {
+    console.log(game.winner, "ini winner");
+    // SWAL BUAT PEMENANG
+    if (game?.winner === localStorage.username) {
       Swal.fire({
-        title: "You lose!",
-        text: "Try again next time!",
+        title: "You win!",
+        text: "Congratulations!",
       });
     }
-  }
+    // SWAL BUAT YG KALAH
+    if (
+      game.winner === game.SecondUser.username ||
+      game.winner === game.FirstUser.username
+    ) {
+      if (game.winner !== localStorage.username) {
+        Swal.fire({
+          title: "You lose!",
+          text: "Try again next time!",
+        });
+      }
+    }
 
-  if (game?.winner === "tie") {
-    Swal.fire({
-      title: "It's tie!",
-      text: "Fight again?",
-    });
+    // SWAL BUAT YG TIE
+    if (game?.winner === "tie") {
+      Swal.fire({
+        title: "It's tie!",
+        text: "Fight again?",
+      });
+    }
   }
 
   //HANDLE STATUS
