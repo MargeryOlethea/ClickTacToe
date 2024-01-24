@@ -52,6 +52,25 @@ function HomePage() {
 
   return (
     <>
+      {/* SECTION ATAS START */}
+      <section className="h-full m-5 bg-blue-200 rounded-3xl p-10 bg-cover bg-center bg-[url('/gradients/gradient3.png')] text-white">
+        <p className="font-extrabold text-3xl">January Challenge!</p>
+        <p className="font-semibold text-lg mt-5">
+          Play and Win IDR 5.000.000!
+        </p>
+        <p className="mt-2">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi illum
+          sint ullam perferendis natus reprehenderit ut in dolorum sit.
+          Doloremque reprehenderit cum cumque tempora qui laudantium incidunt
+          nobis voluptates suscipit!
+        </p>
+      </section>
+
+      <section className="bg-gray-100 m-5 rounded-3xl h-full p-10">
+        lalala
+      </section>
+
+      {/* SECTION BAWAH START */}
       <section className="p-10 mx-16">
         <h2 className="py-7 text-2xl font-bold text-gray-800">Room Lists</h2>
         <button
