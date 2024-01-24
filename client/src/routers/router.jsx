@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout";
 import LoginPage from "../views/LoginPage";
 import RegisterPage from "../views/RegisterPage";
 import GamePage from "../views/GamePage";
-import HomePage from "../views/Homepage";
+import HomePage from "../views/HomePage";
 import MyGamePage from "../views/MyGamePage";
 import LeaderboardPage from "../views/LeaderboardPage";
 
