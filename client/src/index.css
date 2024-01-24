@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: "poppins", sans-serif;
+}
+
 .swal2-title {
   color: #0f172a;
   font-weight: 800;
