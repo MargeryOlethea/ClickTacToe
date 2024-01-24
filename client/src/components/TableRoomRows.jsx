@@ -15,7 +15,9 @@ function TableRoomRows({ room }) {
   // BIKIN STATUS
   let status = "";
 
-  if (room.winner) {
+  if (room.winner === "tie") {
+    status = "Tie!";
+  } else if (room.winner) {
     status = `Winner: ${room.winner}`;
   } else if (!room.SecondUserId) {
     status = "Waiting for Player2";
