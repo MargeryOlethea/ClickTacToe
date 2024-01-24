@@ -3,26 +3,26 @@ function TableUserRows({ user }) {
   let winRate = Math.round((user.totalWin / user.totalPlay) * 100) || 0;
 
   //conditional color
-  let colorBG = "bg-gray-600";
-  let colorText = "text-gray-800";
+  let colorBG = "bg-gray-400";
+  let colorText = "text-gray-700";
 
   if (winRate > 90) {
-    colorBG = "bg-blue-500";
-    colorText = "text-blue-700";
+    colorBG = "bg-red-600";
+    colorText = "text-red-600";
   } else if (winRate > 60) {
-    colorBG = "bg-green-500";
-    colorText = "text-green-700";
-  } else if (winRate > 40) {
-    colorBG = "bg-yellow-500";
-    colorText = "text-yellow-700";
-  } else if (winRate > 0) {
     colorBG = "bg-red-500";
     colorText = "text-red-700";
+  } else if (winRate > 30) {
+    colorBG = "bg-red-400";
+    colorText = "text-red-800";
+  } else if (winRate > 0) {
+    colorBG = "bg-red-300";
+    colorText = "text-red-900";
   }
 
   return (
     <>
-      <div className="flex px-5 py-2.5 my-2 text-md text-gray-800 font-semibold rounded-xl bg-white border items-center">
+      <div className="flex px-5 py-2.5 my-3 text-md text-gray-800 font-semibold rounded-full bg-white items-center">
         <p className="w-2/12">{user.id}</p>
         <div className="w-4/12">
           <p

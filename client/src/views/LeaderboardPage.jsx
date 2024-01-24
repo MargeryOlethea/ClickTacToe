@@ -32,8 +32,9 @@ function LeaderboardPage() {
   }
   return (
     <>
-      <section className="p-10 mx-16">
-        <h2 className="py-7 text-2xl font-bold text-gray-800">Leaderboards</h2>
+      <section className="bg-gray-100 m-5 rounded-3xl h-full p-10">
+        <h2 className="text-4xl font-bold text-gray-800">Leaderboards</h2>
+
         {users.length > 0 && !error && <TableUser users={users} />}
       </section>
     </>

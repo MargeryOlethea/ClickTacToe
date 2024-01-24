@@ -4,13 +4,13 @@ import TableRoomRows from "./TableRoomRows";
 export default function TableRoom({ rooms }) {
   return (
     <>
-      <section className="container px-4 mx-auto">
+      <section className="container mx-auto">
         {rooms.length > 0 && (
           <div className="flex flex-col mt-6">
             <div className=" -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 align-middle px-4 mt-5">
+              <div className="inline-block min-w-full align-middle mt-5">
                 <div className="overflow-hidden  md:rounded-lg">
-                  <div className="flex px-5 py-2.5 text-sm text-gray-500 rounded-xl bg-gray-50 mb-5 border">
+                  <div className="flex px-5 py-3 text-sm text-white bg-cover bg-center bg-[url('/gradients/gradient3.png')] rounded-full mb-5 font-bold">
                     <p className="w-2/12">Room Name</p>
                     <p className="w-2/12"> Mode</p>
                     <p className="w-3/12"> Status</p>

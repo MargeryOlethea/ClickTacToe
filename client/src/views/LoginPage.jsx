@@ -70,9 +70,12 @@ export default function LoginPage({ url }) {
               type="text"
               required
               placeholder="your username"
-              className="py-3 px-5 w-full rounded-2xl shadow-inner bg-gray-100 mt-2"
+              className="border-none py-3 px-5 w-full rounded-2xl bg-gray-100 mt-2"
               onChange={(e) => {
-                setLoginData({ ...loginData, ["username"]: e.target.value });
+                setLoginData({
+                  ...loginData,
+                  ["username"]: e.target.value,
+                });
               }}
             />
           </div>
@@ -80,17 +83,22 @@ export default function LoginPage({ url }) {
             <label className="font-medium">Password</label>
             <input
               type="password"
-              placeholder="your password"
               required
-              className="py-3 px-5 w-full rounded-2xl shadow-inner bg-gray-100 mt-2"
+              placeholder="your password"
+              className="border-none  py-3 px-5 w-full rounded-2xl bg-gray-100 mt-2"
               onChange={(e) => {
-                setLoginData({ ...loginData, ["password"]: e.target.value });
+                setLoginData({
+                  ...loginData,
+                  ["password"]: e.target.value,
+                });
               }}
             />
           </div>
-          <button className="w-full px-4 py-2 text-white font-medium bg-orange-600 hover:bg-orange-500 active:bg-orange-600 rounded-lg duration-150">
-            Login
-          </button>
+          <div>
+            <button className="w-full px-4 py-3 mt-10 text-gray-800 border border-gray-500 font-medium bg-white hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block">
+              Login
+            </button>
+          </div>
         </form>
       </div>
     </main>

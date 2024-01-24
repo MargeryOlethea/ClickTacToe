@@ -2,17 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: "poppins", sans-serif;
+}
+
 .swal2-title {
-  color: #0f172a;
+  color: #44403c;
   font-weight: 800;
 }
 
 .swal2-confirm {
-  background-color: #ea580b !important;
+  background-color: white !important;
+  color: black !important;
+  border: solid 1px black !important;
+  box-shadow: none !important;
+  border-radius: 99px !important;
+}
+
+.swal2-confirm:hover {
+  background-color: #fb923c !important;
   color: white !important;
   border: none !important;
   box-shadow: none !important;
-  border-radius: 8px !important;
+  border-radius: 99px !important;
+  font-weight: 800;
 }
 
 .swal2-cancel {
@@ -24,24 +37,10 @@
 }
 
 .swal2-icon {
-  color: #ea580b !important;
-  border-color: #ea580b !important;
+  color: #fb923c !important;
+  border-color: #fb923c !important;
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-.animate-blink {
-  animation: blink 1s ease-in-out infinite;
 }

@@ -106,6 +106,23 @@ function GamePage() {
     if (checkWinner && checkWinner === "O") {
       winner = game?.SecondUser?.username;
     }
+
+    // PUT KE DATABASE
+    try {
+      const { data } = await axios.put(
+        `${url}/rooms/${id}`,
+        { history: newHistory, winner },
+        { headers: { Authorization: `Bearer ${localStorage.access_token}` } },
+      );
+      fetchGameData(id);
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
+
     // UPDATE STATUS USER
     // MENANG YANG PERTAMA
     if (winner === game?.FirstUser?.username) {
@@ -194,22 +211,36 @@ function GamePage() {
         });
       }
     }
-    // PUT KE DATABASE
-    try {
-      const { data } = await axios.put(
-        `${url}/rooms/${id}`,
-        { history: newHistory, winner },
-        { headers: { Authorization: `Bearer ${localStorage.access_token}` } },
-      );
-      fetchGameData(id);
-    } catch (error) {
+
+    socket.emit("next turn");
+  }
+
+  // SWAL BUAT PEMENANG
+  if (game?.winner === localStorage.username) {
+    Swal.fire({
+      title: "You win!",
+      text: "Congratulations!",
+    });
+  }
+
+  // SWAL BUAT YG KALAH
+  if (
+    game?.winner === game?.SecondUser?.username ||
+    game?.winner === game?.FirstUser?.username
+  ) {
+    if (game?.winner !== localStorage.username) {
       Swal.fire({
-        title: "Error!",
-        icon: "error",
-        text: error.response.data.message,
+        title: "You lose!",
+        text: "Try again next time!",
       });
     }
-    socket.emit("next turn");
+  }
+
+  if (game?.winner === "tie") {
+    Swal.fire({
+      title: "It's tie!",
+      text: "Fight again?",
+    });
   }
 
   //HANDLE STATUS
@@ -234,21 +265,21 @@ function GamePage() {
   return (
     <>
       <div className="flex justify-around p-10">
-        <p className="text-gray-500">
+        <p className=" rounded-full px-7 py-2.5 bg-red-500 text-white text-md">
           Player 1:{" "}
-          <span className="font-bold text-red-500 text-lg">
-            {game?.FirstUser?.username}
-          </span>
+          <span className="font-bold ">{game?.FirstUser?.username}</span>
         </p>
-        <p className="text-gray-500">
+        <p className="rounded-full px-7 py-2.5 bg-yellow-400 text-white text-md">
           Player 2:{" "}
-          <span className="font-bold text-yellow-500 text-lg">
-            {game?.SecondUser?.username}
-          </span>{" "}
+          <span className="font-bold">{game?.SecondUser?.username}</span>{" "}
         </p>
       </div>
       <div className="flex justify-center">
-        <p className="font-extrabold text-xl my-5 mx-auto block">{status}</p>
+        <Link to="/leaderboards">
+          <p className="font-extrabold text-xl my-5 mx-auto block text-gray-800 py-3 px-10 rounded-full border border-gray-500 hover:bg-orange-400 hover:text-white hover:border-transparent">
+            {status}
+          </p>
+        </Link>
       </div>
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-3 w-[450px] h-[450px] bg-white p-10">
@@ -291,9 +322,9 @@ function GamePage() {
         </div>
       </div>
       {game?.winner && (
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center w-full mb-20">
           <Link to="/" className="w-1/6">
-            <button className="w-full px-4 py-2 text-white font-medium bg-orange-600 hover:bg-orange-500 active:bg-orange-600 rounded-lg duration-150">
+            <button className="w-full px-4 py-3 -mt-5 text-gray-800 border border-gray-500 font-medium bg-white hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block">
               Back to home
             </button>
           </Link>
