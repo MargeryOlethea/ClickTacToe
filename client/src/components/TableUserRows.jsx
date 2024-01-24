@@ -7,17 +7,17 @@ function TableUserRows({ user }) {
   let colorText = "text-gray-700";
 
   if (winRate > 90) {
-    colorBG = "bg-red-600";
-    colorText = "text-red-600";
+    colorBG = "bg-yellow-300";
+    colorText = "text-yellow-700";
   } else if (winRate > 60) {
+    colorBG = "bg-orange-500";
+    colorText = "text-orange-700";
+  } else if (winRate > 30) {
     colorBG = "bg-red-500";
     colorText = "text-red-700";
-  } else if (winRate > 30) {
+  } else if (winRate > 0) {
     colorBG = "bg-red-400";
     colorText = "text-red-800";
-  } else if (winRate > 0) {
-    colorBG = "bg-red-300";
-    colorText = "text-red-900";
   }
 
   return (
