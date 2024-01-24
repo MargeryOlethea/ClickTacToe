@@ -32,13 +32,16 @@ export const roomsSlice = createSlice({
 export const { fetchRoomsPending, fetchRoomsRejected, fetchRoomsResolved } =
   roomsSlice.actions;
 
-export const fetchRoomsThunk = () => async (dispatch) => {
+export const fetchRoomsThunk = (filter) => async (dispatch) => {
   try {
     dispatch(fetchRoomsPending());
 
-    const { data } = await axios.get(`${url}/rooms`, {
-      headers: { Authorization: `Bearer ${localStorage.access_token}` },
-    });
+    const { data } = await axios.get(
+      `${url}/rooms${filter ? "?filter='filter'" : ""}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.access_token}` },
+      },
+    );
 
     dispatch(fetchRoomsResolved(data));
   } catch (error) {

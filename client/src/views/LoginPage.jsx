@@ -95,7 +95,7 @@ export default function LoginPage({ url }) {
             />
           </div>
           <div>
-            <button className="w-full px-4 py-3 mt-10 text-white font-medium bg-orange-500 hover:bg-orange-600 active:bg-orange-600 rounded-full duration-150 block">
+            <button className="w-full px-4 py-3 mt-10 text-gray-800 border border-gray-500 font-medium bg-white hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block">
               Login
             </button>
           </div>

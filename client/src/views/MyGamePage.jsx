@@ -33,10 +33,13 @@ function MyGamePage() {
 
   return (
     <>
-      <section className="p-10 mx-16">
-        <h2 className="py-7 text-2xl font-bold text-gray-800">My Games</h2>
+      <section className="bg-gray-100 m-5 rounded-3xl h-full p-10">
+        <h2 className="text-4xl font-bold text-gray-800">My Game</h2>
 
-        <TableRoom rooms={myGame} />
+        <button className="w-[200px] px-4 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block">
+          Create Room
+        </button>
+        {myGame.length > 0 && !error && <TableRoom rooms={myGame} />}
       </section>
     </>
   );

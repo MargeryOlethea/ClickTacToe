@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import PasswordFormModal from "./modals/PasswordFormModal";
 import CreateRoomModal from "./modals/CreateRoomModal";
 import TableRoom from "../components/TableRoom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,12 +10,13 @@ import { socket } from "../socket";
 function HomePage() {
   // FETCH DATA
   const { rooms, loading, error } = useSelector((state) => state.rooms);
+  const [filter, setFilter] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchRoomsThunk());
+    dispatch(fetchRoomsThunk(filter));
     socket.on("refresh room", () => {
-      dispatch(fetchRoomsThunk());
+      dispatch(fetchRoomsThunk(filter));
     });
 
     if (error) {
@@ -31,7 +31,16 @@ function HomePage() {
       socket.off("refresh room", () => {
         dispatch(fetchRoomsThunk());
       });
-  }, []);
+  }, [filter]);
+
+  // HANDLE FILTER
+  function handleFilter() {
+    setFilter("filter");
+  }
+
+  function removeFilter() {
+    setFilter(null);
+  }
 
   // CREATE ROOM MODAL
   const [isCreateRoomModalOpen, setCreateRoomModalOpen] = useState(false);
@@ -56,7 +65,7 @@ function HomePage() {
       <section className="h-full m-5 bg-blue-200 rounded-3xl p-10 bg-cover bg-center bg-[url('/gradients/gradient3.png')] text-white">
         <p className="font-extrabold text-3xl">January Challenge!</p>
         <p className="font-semibold text-lg mt-5">
-          Play and Win IDR 5.000.000!
+          Play and Win IDR 99.999.999.999!
         </p>
         <p className="mt-2">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi illum
@@ -67,19 +76,32 @@ function HomePage() {
       </section>
 
       <section className="bg-gray-100 m-5 rounded-3xl h-full p-10">
-        lalala
-      </section>
+        <h2 className="text-4xl font-bold text-gray-800">Room Lists</h2>
+        <div className="flex justify-between">
+          <button
+            onClick={openCreateRoomModal}
+            className="min-w-[200px] px-4 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-none rounded-full duration-150 block"
+          >
+            Create Room
+          </button>
+          {!filter && (
+            <button
+              onClick={handleFilter}
+              className="min-w-[200px] px-7 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-none rounded-full duration-150 block"
+            >
+              Find Available Room
+            </button>
+          )}
 
-      {/* SECTION BAWAH START */}
-      <section className="p-10 mx-16">
-        <h2 className="py-7 text-2xl font-bold text-gray-800">Room Lists</h2>
-        <button
-          type=""
-          className="py-2 px-3 text-white bg-orange-600 hover:bg-orange-500 rounded-md shadow font-semibold"
-          onClick={openCreateRoomModal}
-        >
-          Create Room
-        </button>
+          {filter && (
+            <button
+              onClick={removeFilter}
+              className="min-w-[200px] px-7 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-none rounded-full duration-150 block"
+            >
+              See All Rooms
+            </button>
+          )}
+        </div>
         {rooms.length > 0 && !error && <TableRoom rooms={rooms} />}
 
         {/* MODLA MODAL */}

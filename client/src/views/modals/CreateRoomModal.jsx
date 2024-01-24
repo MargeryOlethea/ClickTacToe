@@ -89,7 +89,7 @@ function CreateRoomModal({ isOpen, onClose }) {
                   type="text"
                   required
                   placeholder="room name"
-                  className="py-3 px-5 w-full rounded-2xl shadow-inner bg-gray-100 mt-2"
+                  className="border-none py-3 px-5 w-full rounded-2xl bg-gray-100 mt-2"
                   onChange={(e) =>
                     setCreateRoomData({
                       ...createRoomData,
@@ -103,7 +103,7 @@ function CreateRoomModal({ isOpen, onClose }) {
                 <label className="font-medium">Status</label>
                 <select
                   required
-                  className="py-3 px-5 w-full rounded-2xl shadow-inner bg-gray-100 mt-2"
+                  className="border-none  py-3 px-5 w-full rounded-2xl bg-gray-100 mt-2"
                   onChange={(e) =>
                     setCreateRoomData({
                       ...createRoomData,
@@ -123,7 +123,7 @@ function CreateRoomModal({ isOpen, onClose }) {
                     type="password"
                     required
                     placeholder="room password"
-                    className="py-3 px-5 w-full rounded-2xl shadow-inner bg-gray-100 mt-2"
+                    className="border-none  py-3 px-5 w-full rounded-2xl bg-gray-100 mt-2"
                     onChange={(e) =>
                       setCreateRoomData({
                         ...createRoomData,
@@ -134,7 +134,7 @@ function CreateRoomModal({ isOpen, onClose }) {
                 </div>
               )}
               <div>
-                <button className="w-2/6 mt-3 px-4 py-2 text-white font-medium bg-orange-600 hover:bg-orange-500 active:bg-orange-600 rounded-lg duration-150">
+                <button className="w-2/6 px-4 py-3 mt-10 text-gray-800 border border-gray-500 font-medium bg-white hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block">
                   Create
                 </button>
               </div>
