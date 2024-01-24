@@ -111,7 +111,14 @@ function TableRoomRows({ room }) {
             {room.status}
           </p>
         </div>
-        <p className="w-3/12 text-sm text-gray-800"> {status}</p>
+        <p
+          className={`w-3/12 text-sm text-gray-800 ${
+            status === "Waiting for Player2" && "animate-pulse text-orange-500"
+          }`}
+        >
+          {" "}
+          {status}
+        </p>
         <p className="w-2/12 text-red-700 font-medium">
           {" "}
           {room?.FirstUser?.username}
