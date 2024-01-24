@@ -6,14 +6,16 @@ const ButtonDropDown = ({ onClick }) => {
   return (
     <>
       <Dropdown
-        label={localStorage.username}
+        label={`Hello ${localStorage.username}!`}
         dismissOnClick="false"
-        className="text-slate-800 font-medium text-lg rounded-lg border-none max-md:text-xs"
+        className=" font-medium text-lg rounded-lg border-none max-md:text-xs"
         style={{
-          color: "white",
-          backgroundColor: "#f97316",
+          color: "#1f2937",
+          backgroundColor: "transparent",
           padding: "0px 5px",
           fontWeight: "bold",
+          border: "1px solid",
+          borderColor: "#6b7280",
           borderRadius: "30px",
         }}
       >

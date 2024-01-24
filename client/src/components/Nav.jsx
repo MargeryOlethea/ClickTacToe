@@ -25,13 +25,10 @@ export default function Nav() {
 
           <div className="flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0">
             <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0 p-5 font-bold">
-              <li className="text-gray-600 hover:text-orange-600">
+              <li className="text-gray-600 hover:text-orange-400">
                 <Link to="/leaderboards">Leaderboards</Link>
               </li>
             </ul>
-          </div>
-          <div className="mr-3 font-extrabold hover:text-orange-600 text-orange-500 transition ease-in-out duration:500">
-            Hello!
           </div>
 
           <div>

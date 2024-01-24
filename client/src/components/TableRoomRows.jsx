@@ -104,12 +104,12 @@ function TableRoomRows({ room }) {
   }
   return (
     <>
-      <div className="flex px-5 py-2.5 my-2 text-md text-gray-800 font-semibold rounded-xl bg-white border items-center">
+      <div className="flex px-5 py-2.5 my-3 text-md text-gray-800 font-semibold rounded-full bg-white items-center min-h-[60px]">
         <p className="w-1/6 font-bold">{room.name}</p>
         <div className="w-2/12">
           <p
             className={`w-1/2 text-center text-xs py-1 px-2 rounded-full text-white ${
-              room.status === "Public" ? "bg-yellow-500 " : " bg-red-500"
+              room.status === "Public" ? "bg-yellow-300 " : " bg-red-400"
             }`}
           >
             {room.status}
@@ -117,7 +117,7 @@ function TableRoomRows({ room }) {
         </div>
         <p
           className={`w-3/12 text-sm text-gray-800 ${
-            status === "Waiting for Player2" && "animate-pulse text-orange-500"
+            status === "Waiting for Player2" && "animate-pulse text-orange-400"
           }`}
         >
           {" "}
@@ -134,10 +134,10 @@ function TableRoomRows({ room }) {
         {!room.winner && (
           <div className="w-1/12">
             <button
-              className=" px-4 py-2 text-white text-sm bg-orange-600 hover:bg-orange-500 active:bg-orange-600 rounded-lg duration-150"
               onClick={() => {
                 handleJoin(room.id, room.status);
               }}
+              className="w-full text-xs px-4 py-2 text-gray-800 border border-gray-500 font-bold bg-white hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block hover:animate-pulse"
             >
               Join
             </button>

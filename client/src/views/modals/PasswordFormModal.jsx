@@ -21,11 +21,11 @@ function PasswordFormModal({ isOpen, onClose, onSubmit, id }) {
             <form onSubmit={(e) => onSubmit(e, password, id)}>
               <input
                 type="password"
-                className="py-3 px-5 w-full rounded-2xl shadow-inner bg-gray-100 mt-5"
+                className="border-none py-3 px-5 w-full rounded-2xl bg-gray-100 mt-5"
                 placeholder="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button className="w-1/6 mt-5 px-4 py-2 text-white font-medium bg-orange-600 hover:bg-orange-500 active:bg-orange-600 rounded-lg duration-150">
+              <button className="w-1-6 px-4 py-3 mt-5 text-gray-800 border border-gray-500 font-medium bg-white hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block">
                 Join
               </button>
             </form>
