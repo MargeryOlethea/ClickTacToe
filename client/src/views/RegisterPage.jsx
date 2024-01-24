@@ -27,7 +27,6 @@ export default function RegisterPage({ url }) {
       });
       navigate("/login");
     } catch (error) {
-      console.log(error);
       Swal.fire({
         title: "Error!",
         icon: "error",

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { fetchMyGameThunk } from "../features/myGameSlice";
 import { fetchRoomsThunk } from "../features/roomsSlice";
+import { socket } from "../socket";
 
 /* eslint-disable react/prop-types */
 function TableRoomRows({ room }) {
@@ -49,7 +50,7 @@ function TableRoomRows({ room }) {
         );
 
         dispatch(fetchMyGameThunk(), fetchRoomsThunk());
-        navigate("/game");
+        navigate(`/game/${id}`);
       } catch (error) {
         Swal.fire({
           title: "Error!",
@@ -60,6 +61,7 @@ function TableRoomRows({ room }) {
         setLoading(false);
       }
     }
+    socket.emit("new user");
   }
 
   // HANDLE JOIN PRIVATE
@@ -67,7 +69,6 @@ function TableRoomRows({ room }) {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log(pass, "ini pass");
 
       const { data } = await axios.patch(
         `${url}/rooms/${id}/join`,
@@ -78,7 +79,7 @@ function TableRoomRows({ room }) {
       );
 
       dispatch(fetchMyGameThunk(), fetchRoomsThunk());
-      navigate("/game");
+      navigate(`/game/${id}`);
     } catch (error) {
       Swal.fire({
         title: "Error!",
@@ -88,6 +89,7 @@ function TableRoomRows({ room }) {
     } finally {
       setLoading(false);
     }
+    socket.emit("new user");
   }
 
   // CONDITIONAL LOADING
@@ -111,7 +113,14 @@ function TableRoomRows({ room }) {
             {room.status}
           </p>
         </div>
-        <p className="w-3/12 text-sm text-gray-800"> {status}</p>
+        <p
+          className={`w-3/12 text-sm text-gray-800 ${
+            status === "Waiting for Player2" && "animate-pulse text-orange-500"
+          }`}
+        >
+          {" "}
+          {status}
+        </p>
         <p className="w-2/12 text-red-700 font-medium">
           {" "}
           {room?.FirstUser?.username}

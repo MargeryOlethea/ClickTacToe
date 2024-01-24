@@ -97,6 +97,7 @@ class Controller {
             attributes: { exclude: ["password"] },
           },
         ],
+        limit: 15,
       };
       if (filter) query.where = { SecondUserId: null };
 
@@ -111,7 +112,20 @@ class Controller {
     try {
       const { RoomId } = req.params;
 
-      let roomFound = await Room.findByPk(RoomId);
+      let roomFound = await Room.findByPk(RoomId, {
+        include: [
+          {
+            model: User,
+            as: "FirstUser",
+            attributes: { exclude: ["password"] },
+          },
+          {
+            model: User,
+            as: "SecondUser",
+            attributes: { exclude: ["password"] },
+          },
+        ],
+      });
       if (!roomFound) throw new Error("not found");
 
       res.status(200).json(roomFound);
@@ -148,7 +162,8 @@ class Controller {
       let { userId } = req.loginInfo;
       let { RoomId } = req.params;
 
-      let room = await Room.findByPk(RoomId, {
+      let room = await Room.findOne({
+        where: { id: RoomId },
         include: [
           {
             model: User,
@@ -231,6 +246,7 @@ class Controller {
           ["totalWin", "DESC"],
           ["totalPlay", "ASC"],
         ],
+        attributes: { exclude: ["password"] },
       });
       res.status(200).json(data);
     } catch (error) {
@@ -253,18 +269,18 @@ class Controller {
             },
           ],
         },
-        // include: [
-        //   {
-        //     model: User,
-        //     as: "FirstUser",
-        //     attributes: { exclude: ["password"] },
-        //   },
-        //   {
-        //     model: User,
-        //     as: "SecondUser",
-        //     attributes: { exclude: ["password"] },
-        //   },
-        // ],
+        include: [
+          {
+            model: User,
+            as: "FirstUser",
+            attributes: { exclude: ["password"] },
+          },
+          {
+            model: User,
+            as: "SecondUser",
+            attributes: { exclude: ["password"] },
+          },
+        ],
         order: [["createdAt", "DESC"]],
       });
       res.status(200).json(data);

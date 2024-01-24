@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchRoomsThunk } from "../features/roomsSlice";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
+import { socket } from "../socket";
 
 function HomePage() {
   // FETCH DATA
@@ -14,6 +15,9 @@ function HomePage() {
 
   useEffect(() => {
     dispatch(fetchRoomsThunk());
+    socket.on("refresh room", () => {
+      dispatch(fetchRoomsThunk());
+    });
 
     if (error) {
       Swal.fire({
@@ -22,6 +26,11 @@ function HomePage() {
         text: error,
       });
     }
+
+    return () =>
+      socket.off("refresh room", () => {
+        dispatch(fetchRoomsThunk());
+      });
   }, []);
 
   // CREATE ROOM MODAL
@@ -31,7 +40,6 @@ function HomePage() {
     setCreateRoomModalOpen(true);
   };
   const closeCreateRoomModal = () => setCreateRoomModalOpen(false);
-  console.log(isCreateRoomModalOpen);
 
   // CONDITIONAL LOADING
   if (loading) {

@@ -13,7 +13,6 @@ export default function LoginPage({ url }) {
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(loginData);
     try {
       setLoading(true);
       let { data } = await axios.post(`${url}/login`, loginData);
