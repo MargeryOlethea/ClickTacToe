@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { fetchRoomsThunk } from "../../features/roomsSlice";
+import { socket } from "../../socket";
 
 /* eslint-disable react/prop-types */
 function CreateRoomModal({ isOpen, onClose }) {
@@ -47,6 +48,7 @@ function CreateRoomModal({ isOpen, onClose }) {
     } finally {
       setLoading(false);
     }
+    socket.emit("new room");
   }
 
   // CONDITION BUAT MODAL

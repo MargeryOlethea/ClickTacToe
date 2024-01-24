@@ -41,7 +41,7 @@ module.exports = {
       history: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: ` , , , , , , , , `,
+        defaultValue: `,,,,,,,,`,
       },
       winner: {
         type: Sequelize.STRING,

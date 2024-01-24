@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       history: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: ` , , , , , , , , `,
+        defaultValue: `,,,,,,,,`,
         validate: {
           notNull: { msg: "History is required" },
           notEmpty: { msg: "History is required" },
@@ -73,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Room",
-    }
+    },
   );
   return Room;
 };

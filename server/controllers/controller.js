@@ -112,7 +112,20 @@ class Controller {
     try {
       const { RoomId } = req.params;
 
-      let roomFound = await Room.findByPk(RoomId);
+      let roomFound = await Room.findByPk(RoomId, {
+        include: [
+          {
+            model: User,
+            as: "FirstUser",
+            attributes: { exclude: ["password"] },
+          },
+          {
+            model: User,
+            as: "SecondUser",
+            attributes: { exclude: ["password"] },
+          },
+        ],
+      });
       if (!roomFound) throw new Error("not found");
 
       res.status(200).json(roomFound);
@@ -149,7 +162,8 @@ class Controller {
       let { userId } = req.loginInfo;
       let { RoomId } = req.params;
 
-      let room = await Room.findByPk(RoomId, {
+      let room = await Room.findOne({
+        where: { id: RoomId },
         include: [
           {
             model: User,

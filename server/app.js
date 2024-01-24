@@ -40,6 +40,17 @@ app.use(errorHandler);
 
 io.on("connection", (socket) => {
   console.log("a user connected " + socket.id);
+  socket.on("next turn", () => {
+    socket.broadcast.emit("refresh game");
+  });
+
+  socket.on("new user", () => {
+    socket.broadcast.emit("refresh game");
+  });
+
+  socket.on("new room", () => {
+    socket.broadcast.emit("refresh room");
+  });
 });
 
 httpServer.listen(port, () => {

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 function TableUserRows({ user }) {
   let winRate = Math.round((user.totalWin / user.totalPlay) * 100) || 0;
-  console.log(winRate, ">>>>", user.id);
 
   //conditional color
   let colorBG = "bg-gray-600";
@@ -32,8 +31,8 @@ function TableUserRows({ user }) {
             {user.username}
           </p>
         </div>
-        <p className="w-2/12">{user.totalPlay}</p>
         <p className="w-2/12">{user.totalWin}</p>
+        <p className="w-2/12">{user.totalPlay}</p>
         <p className={`w-2/12 ${colorText}`}>{winRate}%</p>
       </div>
     </>

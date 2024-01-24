@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import TableUserRows from "./TableUserRows";
 
 function TableUser({ users }) {
@@ -12,8 +13,8 @@ function TableUser({ users }) {
                   <div className="flex px-5 py-2.5 text-sm text-gray-500 rounded-xl bg-gray-50 mb-5 border">
                     <p className="w-2/12">ID</p>
                     <p className="w-4/12"> Username</p>
-                    <p className="w-2/12"> Total Games</p>
                     <p className="w-2/12"> Total Wins</p>
+                    <p className="w-2/12"> Total Games</p>
                     <p className="w-2/12"> Win Rate</p>
                   </div>
                   {users?.map((user) => {

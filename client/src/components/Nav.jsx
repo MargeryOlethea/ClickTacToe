@@ -2,13 +2,13 @@
 import { useState } from "react";
 import Logo from "./Logo";
 import { Link, useNavigate } from "react-router-dom";
-useNavigate
+useNavigate;
 export default function Nav() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  function handleLogout(){
-    localStorage.clear()
-    navigate("/login")
+  function handleLogout() {
+    localStorage.clear();
+    navigate("/login");
   }
   return (
     <nav className="bg-white w-full border-b md:border-0 md:static rounded-lg shadow-md">
@@ -19,10 +19,8 @@ export default function Nav() {
               <Logo />
             </Link>
           </div>
-          <div className="md:hidden">
-            <button className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"></button>
-          </div>
         </div>
+
         <div className="flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0">
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             <li className="text-gray-600 hover:text-orange-600">
@@ -33,8 +31,14 @@ export default function Nav() {
             </li>
           </ul>
         </div>
-        <div className="hidden md:inline-block">
-          <button onClick={handleLogout} className="py-3 px-4 text-white bg-orange-600 hover:bg-orange-500 rounded-md shadow">
+        <div className="mx-20 font-extrabold hover:text-orange-600 transition ease-in-out duration:500">
+          Hello {localStorage.username}!
+        </div>
+        <div className="">
+          <button
+            onClick={handleLogout}
+            className="py-3 px-4 text-white bg-orange-600 hover:bg-orange-500 rounded-md shadow font-bold"
+          >
             Logout
           </button>
         </div>
