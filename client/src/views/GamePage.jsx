@@ -6,8 +6,19 @@ import Loading from "../components/Loading";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { socket } from "../socket";
+import useSound from "use-sound";
+import errorSfx from "../sounds/Error.mp3";
+import winSfx from "../sounds/Win.mp3";
+import loseSfx from "../sounds/Lose.mp3";
+import tieSfx from "../sounds/Tie.mp3";
 
 function GamePage() {
+  // SOUNDS
+  const [playError] = useSound(errorSfx);
+  const [playWin] = useSound(winSfx);
+  const [playLose] = useSound(loseSfx);
+  const [playTie] = useSound(tieSfx);
+
   // FETCH DATA
   let [game, setGame] = useState({});
   let [loading, setLoading] = useState(false);
@@ -25,6 +36,7 @@ function GamePage() {
       setGame(data);
       setSquares(data.history.split(","));
     } catch (error) {
+      playError();
       Swal.fire({
         title: "Error!",
         icon: "error",
@@ -116,6 +128,7 @@ function GamePage() {
       );
       fetchGameData(id);
     } catch (error) {
+      playError();
       Swal.fire({
         title: "Error!",
         icon: "error",
@@ -140,6 +153,7 @@ function GamePage() {
           { headers: { Authorization: `Bearer ${localStorage.access_token}` } },
         );
       } catch (error) {
+        playError();
         Swal.fire({
           title: "Error!",
           icon: "error",
@@ -164,6 +178,7 @@ function GamePage() {
           { headers: { Authorization: `Bearer ${localStorage.access_token}` } },
         );
       } catch (error) {
+        playError();
         Swal.fire({
           title: "Error!",
           icon: "error",
@@ -204,6 +219,7 @@ function GamePage() {
         );
         fetchGameData(id);
       } catch (error) {
+        playError();
         Swal.fire({
           title: "Error!",
           icon: "error",
@@ -219,6 +235,7 @@ function GamePage() {
     console.log(game.winner, "ini winner");
     // SWAL BUAT PEMENANG
     if (game?.winner === localStorage.username) {
+      playWin();
       Swal.fire({
         title: "You win!",
         text: "Congratulations!",
@@ -230,6 +247,7 @@ function GamePage() {
       game.winner === game.FirstUser.username
     ) {
       if (game.winner !== localStorage.username) {
+        playLose();
         Swal.fire({
           title: "You lose!",
           text: "Try again next time!",
@@ -239,6 +257,7 @@ function GamePage() {
 
     // SWAL BUAT YG TIE
     if (game?.winner === "tie") {
+      playTie();
       Swal.fire({
         title: "It's tie!",
         text: "Fight again?",

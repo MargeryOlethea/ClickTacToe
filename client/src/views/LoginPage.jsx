@@ -6,8 +6,11 @@ import Logo from "../components/Logo";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import Loading from "../components/Loading";
+import useSound from "use-sound";
+import errorSfx from "../sounds/Error.mp3";
 
 export default function LoginPage({ url }) {
+  const [playError] = useSound(errorSfx);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -22,6 +25,7 @@ export default function LoginPage({ url }) {
 
       navigate("/");
     } catch (error) {
+      playError();
       Swal.fire({
         title: "Error!",
         icon: "error",

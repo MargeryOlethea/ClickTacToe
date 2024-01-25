@@ -9,9 +9,12 @@ import { useDispatch } from "react-redux";
 import { fetchMyGameThunk } from "../features/myGameSlice";
 import { fetchRoomsThunk } from "../features/roomsSlice";
 import { socket } from "../socket";
+import useSound from "use-sound";
+import errorSfx from "../sounds/Error.mp3";
 
 /* eslint-disable react/prop-types */
 function TableRoomRows({ room }) {
+  const [playError] = useSound(errorSfx);
   // BIKIN STATUS
   let status = "";
 
@@ -59,6 +62,7 @@ function TableRoomRows({ room }) {
           icon: "error",
           text: error.response.data.message,
         });
+        playError();
       } finally {
         setLoading(false);
       }
@@ -88,6 +92,7 @@ function TableRoomRows({ room }) {
         icon: "error",
         text: error.response.data.message,
       });
+      play();
     } finally {
       setLoading(false);
     }

@@ -4,8 +4,11 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { fetchMyGameThunk } from "../features/myGameSlice";
 import Loading from "../components/Loading";
+import useSound from "use-sound";
+import errorSfx from "../sounds/Error.mp3";
 
 function MyGamePage() {
+  const [playError] = useSound(errorSfx);
   // FETCH DATA
   const { myGame, loading, error } = useSelector((state) => state.myGame);
   const dispatch = useDispatch();
@@ -14,6 +17,7 @@ function MyGamePage() {
     dispatch(fetchMyGameThunk());
 
     if (error) {
+      playError();
       Swal.fire({
         title: "Error!",
         icon: "error",
