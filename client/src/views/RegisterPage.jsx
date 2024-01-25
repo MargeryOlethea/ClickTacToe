@@ -50,7 +50,7 @@ export default function RegisterPage({ url }) {
       <main className="h-screen w-screen">
         <div className="flex h-full p-10 gap-5">
           {/* KIRI */}
-          <div className="w-1/2 bg-cover bg-center bg-[url('/gradients/gradient3.png')] rounded-3xl space-y-2 flex items-center p-10 text-white">
+          <div className="bg-orange-400 w-1/2 bg-cover bg-center bg-[url('/gradients/gradient3.png')] rounded-3xl space-y-2 flex items-center p-10 text-white">
             <div>
               <div className="mt-10">
                 <p className="font-extrabold text-3xl ">Comeback King</p>

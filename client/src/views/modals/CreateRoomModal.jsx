@@ -74,7 +74,7 @@ function CreateRoomModal({ isOpen, onClose }) {
 
         <div
           className={
-            "fixed bg-white w-2/6 min-h-4/6 rounded-3xl shadow-lg flex"
+            "fixed bg-white w-2/6 min-h-4/6 rounded-3xl shadow-lg flex max-md:w-3/6"
           }
         >
           <div className="p-10 w-full h-full">
