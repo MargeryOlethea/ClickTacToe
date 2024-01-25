@@ -68,6 +68,7 @@ function TableRoomRows({ room }) {
       }
     }
     socket.emit("new user");
+    socket.emit("new room");
   }
 
   // HANDLE JOIN PRIVATE
@@ -92,11 +93,12 @@ function TableRoomRows({ room }) {
         icon: "error",
         text: error.response.data.message,
       });
-      play();
+      playError();
     } finally {
       setLoading(false);
     }
     socket.emit("new user");
+    socket.emit("new room");
   }
 
   // CONDITIONAL LOADING

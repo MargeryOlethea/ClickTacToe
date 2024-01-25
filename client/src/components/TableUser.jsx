@@ -12,7 +12,7 @@ function TableUser({ users }) {
                 <div className="overflow-hidden  md:rounded-lg">
                   <div className="bg-orange-400 flex px-5 py-3 text-sm text-white bg-cover bg-center bg-[url('/gradients/gradient3.png')] rounded-full mb-5 font-bold">
                     <p className="w-2/12">ID</p>
-                    <p className="w-4/12"> Username</p>
+                    <p className="w-4/12 min-w-[100px]"> Username</p>
                     <p className="w-2/12"> Total Wins</p>
                     <p className="w-2/12"> Total Games</p>
                     <p className="w-2/12"> Win Rate</p>
