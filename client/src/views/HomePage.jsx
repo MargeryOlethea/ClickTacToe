@@ -62,7 +62,7 @@ function HomePage() {
   return (
     <>
       {/* SECTION ATAS START */}
-      <section className="h-full m-5 bg-blue-200 rounded-3xl p-10 bg-cover bg-center bg-[url('/gradients/gradient3.png')] text-white">
+      <section className="h-full m-5 bg-orange-400 rounded-3xl p-10 bg-cover bg-center bg-[url('/gradients/gradient3.png')] text-white">
         <p className="font-extrabold text-3xl">January Challenge!</p>
         <p className="font-semibold text-lg mt-5">
           Play and Win IDR 99.999.999.999!
@@ -80,14 +80,14 @@ function HomePage() {
         <div className="flex justify-between">
           <button
             onClick={openCreateRoomModal}
-            className="min-w-[200px] px-4 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-none rounded-full duration-150 block"
+            className="min-w-[200px] px-4 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block"
           >
             Create Room
           </button>
           {!filter && (
             <button
               onClick={handleFilter}
-              className="min-w-[200px] px-7 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-none rounded-full duration-150 block"
+              className="min-w-[200px] px-7 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block"
             >
               Find Available Room
             </button>
@@ -96,7 +96,7 @@ function HomePage() {
           {filter && (
             <button
               onClick={removeFilter}
-              className="min-w-[200px] px-7 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-none rounded-full duration-150 block"
+              className="min-w-[200px] px-7 py-3 mt-7 text-gray-800 border border-gray-500 font-medium bg-transparent hover:bg-orange-400 hover:text-white hover:border-transparent rounded-full duration-150 block"
             >
               See All Rooms
             </button>

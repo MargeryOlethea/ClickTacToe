@@ -26,7 +26,7 @@ function TableUserRows({ user }) {
         <p className="w-2/12">{user.id}</p>
         <div className="w-4/12">
           <p
-            className={`w-1/3 text-center text-sm py-1 px-2 rounded-full text-white ${colorBG}`}
+            className={`min-w-[100px] w-1/3 text-center text-sm py-1 px-2 rounded-full text-white ${colorBG}`}
           >
             {user.username}
           </p>
