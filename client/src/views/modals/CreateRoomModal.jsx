@@ -30,7 +30,7 @@ function CreateRoomModal({ isOpen, onClose }) {
       });
 
       dispatch(fetchRoomsThunk());
-      navigate("/");
+      navigate(`/game/${data.id}`);
 
       onClose();
 
