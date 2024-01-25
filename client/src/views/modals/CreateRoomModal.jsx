@@ -6,9 +6,14 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { fetchRoomsThunk } from "../../features/roomsSlice";
 import { socket } from "../../socket";
+import successSfx from "../../sounds/Success.mp3";
+import errorSfx from "../../sounds/Error.mp3";
+import useSound from "use-sound";
 
 /* eslint-disable react/prop-types */
 function CreateRoomModal({ isOpen, onClose }) {
+  const [playError] = useSound(errorSfx);
+  const [playSuccess] = useSound(successSfx);
   const [loading, setLoading] = useState(false);
   const [createRoomData, setCreateRoomData] = useState({
     name: "",
@@ -39,7 +44,9 @@ function CreateRoomModal({ isOpen, onClose }) {
         icon: "success",
         text: `Success created room ${data.name}!`,
       });
+      playSuccess();
     } catch (error) {
+      playError();
       Swal.fire({
         title: "Error!",
         icon: "error",

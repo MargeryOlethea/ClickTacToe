@@ -4,8 +4,11 @@ import { useEffect } from "react";
 import { fetchUsersThunk } from "../features/usersSlice";
 import Swal from "sweetalert2";
 import Loading from "../components/Loading";
+import useSound from "use-sound";
+import errorSfx from "../sounds/Error.mp3";
 
 function LeaderboardPage() {
+  const [playError] = useSound(errorSfx);
   // FETCH DATA
   const { users, loading, error } = useSelector((state) => state.users);
   const dispatch = useDispatch();
@@ -14,6 +17,7 @@ function LeaderboardPage() {
     dispatch(fetchUsersThunk());
 
     if (error) {
+      playError();
       Swal.fire({
         title: "Error!",
         icon: "error",

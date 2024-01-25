@@ -6,12 +6,15 @@ import { fetchRoomsThunk } from "../features/roomsSlice";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
 import { socket } from "../socket";
+import useSound from "use-sound";
+import errorSfx from "../sounds/Error.mp3";
 
 function HomePage() {
   // FETCH DATA
   const { rooms, loading, error } = useSelector((state) => state.rooms);
   const [filter, setFilter] = useState(null);
   const dispatch = useDispatch();
+  const [playError] = useSound(errorSfx);
 
   useEffect(() => {
     dispatch(fetchRoomsThunk(filter));
@@ -20,6 +23,7 @@ function HomePage() {
     });
 
     if (error) {
+      playError();
       Swal.fire({
         title: "Error!",
         icon: "error",

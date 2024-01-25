@@ -5,8 +5,13 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Loading from "../components/Loading";
+import errorSfx from "../sounds/Error.mp3";
+import successSfx from "../sounds/Success.mp3";
+import useSound from "use-sound";
 
 export default function RegisterPage({ url }) {
+  const [playError] = useSound(errorSfx);
+  const [playSuccess] = useSound(successSfx);
   const [loading, setLoading] = useState(false);
   const [registerData, setRegisterData] = useState({
     username: "",
@@ -25,6 +30,7 @@ export default function RegisterPage({ url }) {
         text: "Success created new user, please login!",
         icon: "success",
       });
+      playSuccess();
       navigate("/login");
     } catch (error) {
       Swal.fire({
@@ -32,6 +38,7 @@ export default function RegisterPage({ url }) {
         icon: "error",
         text: error.response.data.message,
       });
+      playError();
     } finally {
       setLoading(false);
     }
